@@ -20,6 +20,12 @@ namespace ConsoleClient.ServiceReference1 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SayHello", ReplyAction="http://tempuri.org/IService1/SayHelloResponse")]
         System.Threading.Tasks.Task<string> SayHelloAsync(string name);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetRate", ReplyAction="http://tempuri.org/IService1/GetRateResponse")]
+        string GetRate(string currencyCode);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetRate", ReplyAction="http://tempuri.org/IService1/GetRateResponse")]
+        System.Threading.Tasks.Task<string> GetRateAsync(string currencyCode);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -55,6 +61,14 @@ namespace ConsoleClient.ServiceReference1 {
         
         public System.Threading.Tasks.Task<string> SayHelloAsync(string name) {
             return base.Channel.SayHelloAsync(name);
+        }
+        
+        public string GetRate(string currencyCode) {
+            return base.Channel.GetRate(currencyCode);
+        }
+        
+        public System.Threading.Tasks.Task<string> GetRateAsync(string currencyCode) {
+            return base.Channel.GetRateAsync(currencyCode);
         }
     }
 }

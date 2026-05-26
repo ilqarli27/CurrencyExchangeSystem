@@ -7,5 +7,8 @@ namespace CurrencyExchangeSystem
     {
         [OperationContract]
         string SayHello(string name);
+
+        [OperationContract]
+        string GetRate(string currencyCode);
     }
 }
