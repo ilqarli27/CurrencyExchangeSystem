@@ -1,0 +1,66 @@
+﻿<Window x:Class="WpfClient.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Currency Exchange Office" Height="600" Width="900">
+    <Grid>
+        <TabControl>
+
+            <TabItem Header="Rates">
+                <StackPanel Margin="20">
+                    <TextBlock Text="Currency Code (e.g. USD, EUR):" Margin="0,0,0,5"/>
+                    <TextBox x:Name="txtCurrency" Width="200" HorizontalAlignment="Left" Margin="0,0,0,10"/>
+                    <Button Content="Get Rate" Width="150" HorizontalAlignment="Left" Click="GetRate_Click" Margin="0,0,0,10"/>
+                    <Button Content="Get All Rates" Width="150" HorizontalAlignment="Left" Click="GetAllRates_Click" Margin="0,0,0,10"/>
+                    <TextBox x:Name="txtRateResult" Height="300" IsReadOnly="True" VerticalScrollBarVisibility="Auto"/>
+                </StackPanel>
+            </TabItem>
+
+            <TabItem Header="Account">
+                <StackPanel Margin="20">
+                    <TextBlock Text="Username:" Margin="0,0,0,5"/>
+                    <TextBox x:Name="txtUsername" Width="200" HorizontalAlignment="Left" Margin="0,0,0,10"/>
+                    <TextBlock Text="Password:" Margin="0,0,0,5"/>
+                    <PasswordBox x:Name="txtPassword" Width="200" HorizontalAlignment="Left" Margin="0,0,0,10"/>
+                    <Button Content="Register" Width="150" HorizontalAlignment="Left" Click="Register_Click" Margin="0,0,0,5"/>
+                    <Button Content="Login" Width="150" HorizontalAlignment="Left" Click="Login_Click" Margin="0,0,0,10"/>
+                    <TextBlock Text="Top Up Amount (PLN):" Margin="0,0,0,5"/>
+                    <TextBox x:Name="txtTopUp" Width="200" HorizontalAlignment="Left" Margin="0,0,0,10"/>
+                    <Button Content="Top Up" Width="150" HorizontalAlignment="Left" Click="TopUp_Click" Margin="0,0,0,10"/>
+                    <Button Content="Get Balance" Width="150" HorizontalAlignment="Left" Click="GetBalance_Click" Margin="0,0,0,10"/>
+                    <TextBox x:Name="txtAccountResult" Height="150" IsReadOnly="True" VerticalScrollBarVisibility="Auto"/>
+                </StackPanel>
+            </TabItem>
+
+            <TabItem Header="Exchange">
+                <StackPanel Margin="20">
+                    <TextBlock Text="Username:" Margin="0,0,0,5"/>
+                    <TextBox x:Name="txtExUsername" Width="200" HorizontalAlignment="Left" Margin="0,0,0,10"/>
+                    <TextBlock Text="Currency Code:" Margin="0,0,0,5"/>
+                    <TextBox x:Name="txtExCurrency" Width="200" HorizontalAlignment="Left" Margin="0,0,0,10"/>
+                    <TextBlock Text="Amount:" Margin="0,0,0,5"/>
+                    <TextBox x:Name="txtExAmount" Width="200" HorizontalAlignment="Left" Margin="0,0,0,10"/>
+                    <Button Content="Buy Currency" Width="150" HorizontalAlignment="Left" Click="Buy_Click" Margin="0,0,0,5"/>
+                    <Button Content="Sell Currency" Width="150" HorizontalAlignment="Left" Click="Sell_Click" Margin="0,0,0,10"/>
+                    <TextBox x:Name="txtExResult" Height="150" IsReadOnly="True" VerticalScrollBarVisibility="Auto"/>
+                </StackPanel>
+            </TabItem>
+
+            <TabItem Header="History">
+                <StackPanel Margin="20">
+                    <TextBlock Text="Username:" Margin="0,0,0,5"/>
+                    <TextBox x:Name="txtHistUsername" Width="200" HorizontalAlignment="Left" Margin="0,0,0,10"/>
+                    <TextBlock Text="Currency Code:" Margin="0,0,0,5"/>
+                    <TextBox x:Name="txtHistCurrency" Width="200" HorizontalAlignment="Left" Margin="0,0,0,10"/>
+                    <TextBlock Text="Start Date (yyyy-MM-dd):" Margin="0,0,0,5"/>
+                    <TextBox x:Name="txtStartDate" Width="200" HorizontalAlignment="Left" Margin="0,0,0,10"/>
+                    <TextBlock Text="End Date (yyyy-MM-dd):" Margin="0,0,0,5"/>
+                    <TextBox x:Name="txtEndDate" Width="200" HorizontalAlignment="Left" Margin="0,0,0,10"/>
+                    <Button Content="Get Transaction History" Width="200" HorizontalAlignment="Left" Click="GetHistory_Click" Margin="0,0,0,5"/>
+                    <Button Content="Get Historical Rates" Width="200" HorizontalAlignment="Left" Click="GetHistoricalRates_Click" Margin="0,0,0,10"/>
+                    <TextBox x:Name="txtHistResult" Height="150" IsReadOnly="True" VerticalScrollBarVisibility="Auto"/>
+                </StackPanel>
+            </TabItem>
+
+        </TabControl>
+    </Grid>
+</Window>

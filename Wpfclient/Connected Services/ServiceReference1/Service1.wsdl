@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://tempuri.org/" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" name="Service1" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:63035/Service1.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:63035/Service1.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IService1_GetRate_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRate" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetRate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetAllRates_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllRates" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetAllRates_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllRatesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetHistoricalRates_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetHistoricalRates" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetHistoricalRates_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetHistoricalRatesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_Register_InputMessage">
+    <wsdl:part name="parameters" element="tns:Register" />
+  </wsdl:message>
+  <wsdl:message name="IService1_Register_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_Login_InputMessage">
+    <wsdl:part name="parameters" element="tns:Login" />
+  </wsdl:message>
+  <wsdl:message name="IService1_Login_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_TopUp_InputMessage">
+    <wsdl:part name="parameters" element="tns:TopUp" />
+  </wsdl:message>
+  <wsdl:message name="IService1_TopUp_OutputMessage">
+    <wsdl:part name="parameters" element="tns:TopUpResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetBalance_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetBalance" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetBalance_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetBalanceResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_BuyCurrency_InputMessage">
+    <wsdl:part name="parameters" element="tns:BuyCurrency" />
+  </wsdl:message>
+  <wsdl:message name="IService1_BuyCurrency_OutputMessage">
+    <wsdl:part name="parameters" element="tns:BuyCurrencyResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_SellCurrency_InputMessage">
+    <wsdl:part name="parameters" element="tns:SellCurrency" />
+  </wsdl:message>
+  <wsdl:message name="IService1_SellCurrency_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SellCurrencyResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetTransactionHistory_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTransactionHistory" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetTransactionHistory_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTransactionHistoryResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IService1">
+    <wsdl:operation name="GetRate">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetRate" message="tns:IService1_GetRate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetRateResponse" message="tns:IService1_GetRate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllRates">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetAllRates" message="tns:IService1_GetAllRates_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetAllRatesResponse" message="tns:IService1_GetAllRates_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetHistoricalRates">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetHistoricalRates" message="tns:IService1_GetHistoricalRates_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetHistoricalRatesResponse" message="tns:IService1_GetHistoricalRates_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Register">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/Register" message="tns:IService1_Register_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/RegisterResponse" message="tns:IService1_Register_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/Login" message="tns:IService1_Login_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/LoginResponse" message="tns:IService1_Login_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="TopUp">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/TopUp" message="tns:IService1_TopUp_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/TopUpResponse" message="tns:IService1_TopUp_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBalance">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetBalance" message="tns:IService1_GetBalance_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetBalanceResponse" message="tns:IService1_GetBalance_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="BuyCurrency">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/BuyCurrency" message="tns:IService1_BuyCurrency_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/BuyCurrencyResponse" message="tns:IService1_BuyCurrency_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SellCurrency">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/SellCurrency" message="tns:IService1_SellCurrency_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/SellCurrencyResponse" message="tns:IService1_SellCurrency_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTransactionHistory">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetTransactionHistory" message="tns:IService1_GetTransactionHistory_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetTransactionHistoryResponse" message="tns:IService1_GetTransactionHistory_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IService1" type="tns:IService1">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetRate">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetRate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllRates">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetAllRates" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetHistoricalRates">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetHistoricalRates" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Register">
+      <soap:operation soapAction="http://tempuri.org/IService1/Register" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <soap:operation soapAction="http://tempuri.org/IService1/Login" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TopUp">
+      <soap:operation soapAction="http://tempuri.org/IService1/TopUp" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBalance">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetBalance" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BuyCurrency">
+      <soap:operation soapAction="http://tempuri.org/IService1/BuyCurrency" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SellCurrency">
+      <soap:operation soapAction="http://tempuri.org/IService1/SellCurrency" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTransactionHistory">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetTransactionHistory" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Service1">
+    <wsdl:port name="BasicHttpBinding_IService1" binding="tns:BasicHttpBinding_IService1">
+      <soap:address location="http://localhost:63035/Service1.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
