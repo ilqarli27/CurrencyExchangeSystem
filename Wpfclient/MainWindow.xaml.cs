@@ -72,8 +72,27 @@ namespace WpfClient
                 MessageBox.Show("Please login first!", "Error");
                 return;
             }
-            decimal amount = decimal.Parse(txtExAmount.Text);
-            txtExResult.Text = client.BuyCurrency(loggedInUser, txtExCurrency.Text, amount);
+
+            if (txtExCurrency.Text == "" || txtExAmount.Text == "")
+            {
+                MessageBox.Show("Please enter currency code and amount!", "Error");
+                return;
+            }
+
+            decimal amount;
+            if (!decimal.TryParse(txtExAmount.Text, out amount) || amount <= 0)
+            {
+                MessageBox.Show("Please enter a valid amount!", "Error");
+                return;
+            }
+
+            string result = client.BuyCurrency(loggedInUser, txtExCurrency.Text, amount);
+            txtExResult.Text = result;
+
+            if (result.StartsWith("Success"))
+                MessageBox.Show(result, "Purchase successful");
+            else
+                MessageBox.Show(result, "Error");
         }
 
         private void Sell_Click(object sender, RoutedEventArgs e)
@@ -83,8 +102,27 @@ namespace WpfClient
                 MessageBox.Show("Please login first!", "Error");
                 return;
             }
-            decimal amount = decimal.Parse(txtExAmount.Text);
-            txtExResult.Text = client.SellCurrency(loggedInUser, txtExCurrency.Text, amount);
+
+            if (txtExCurrency.Text == "" || txtExAmount.Text == "")
+            {
+                MessageBox.Show("Please enter currency code and amount!", "Error");
+                return;
+            }
+
+            decimal amount;
+            if (!decimal.TryParse(txtExAmount.Text, out amount) || amount <= 0)
+            {
+                MessageBox.Show("Please enter a valid amount!", "Error");
+                return;
+            }
+
+            string result = client.SellCurrency(loggedInUser, txtExCurrency.Text, amount);
+            txtExResult.Text = result;
+
+            if (result.StartsWith("Success"))
+                MessageBox.Show(result, "Sale successful");
+            else
+                MessageBox.Show(result, "Error");
         }
 
         private void GetHistory_Click(object sender, RoutedEventArgs e)
