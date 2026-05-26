@@ -7,6 +7,7 @@ namespace WpfClient
     public partial class MainWindow : Window
     {
         Service1Client client = new Service1Client();
+        private string loggedInUser = "";
 
         public MainWindow()
         {
@@ -30,35 +31,70 @@ namespace WpfClient
 
         private void Login_Click(object sender, RoutedEventArgs e)
         {
-            txtAccountResult.Text = client.Login(txtUsername.Text, txtPassword.Password);
+            string result = client.Login(txtUsername.Text, txtPassword.Password);
+            txtAccountResult.Text = result;
+
+            if (result.StartsWith("Success"))
+            {
+                loggedInUser = txtUsername.Text;
+                txtExUsername.Text = loggedInUser;
+                txtHistUsername.Text = loggedInUser;
+                this.Title = "Currency Exchange Office — " + loggedInUser;
+                MessageBox.Show("Welcome " + loggedInUser + "!", "Login successful");
+            }
         }
 
         private void TopUp_Click(object sender, RoutedEventArgs e)
         {
+            if (loggedInUser == "")
+            {
+                MessageBox.Show("Please login first!", "Error");
+                return;
+            }
             decimal amount = decimal.Parse(txtTopUp.Text);
-            txtAccountResult.Text = client.TopUp(txtUsername.Text, amount);
+            txtAccountResult.Text = client.TopUp(loggedInUser, amount);
         }
 
         private void GetBalance_Click(object sender, RoutedEventArgs e)
         {
-            txtAccountResult.Text = client.GetBalance(txtUsername.Text);
+            if (loggedInUser == "")
+            {
+                MessageBox.Show("Please login first!", "Error");
+                return;
+            }
+            txtAccountResult.Text = client.GetBalance(loggedInUser);
         }
 
         private void Buy_Click(object sender, RoutedEventArgs e)
         {
+            if (loggedInUser == "")
+            {
+                MessageBox.Show("Please login first!", "Error");
+                return;
+            }
             decimal amount = decimal.Parse(txtExAmount.Text);
-            txtExResult.Text = client.BuyCurrency(txtExUsername.Text, txtExCurrency.Text, amount);
+            txtExResult.Text = client.BuyCurrency(loggedInUser, txtExCurrency.Text, amount);
         }
 
         private void Sell_Click(object sender, RoutedEventArgs e)
         {
+            if (loggedInUser == "")
+            {
+                MessageBox.Show("Please login first!", "Error");
+                return;
+            }
             decimal amount = decimal.Parse(txtExAmount.Text);
-            txtExResult.Text = client.SellCurrency(txtExUsername.Text, txtExCurrency.Text, amount);
+            txtExResult.Text = client.SellCurrency(loggedInUser, txtExCurrency.Text, amount);
         }
 
         private void GetHistory_Click(object sender, RoutedEventArgs e)
         {
-            txtHistResult.Text = client.GetTransactionHistory(txtHistUsername.Text);
+            if (loggedInUser == "")
+            {
+                MessageBox.Show("Please login first!", "Error");
+                return;
+            }
+            txtHistResult.Text = client.GetTransactionHistory(loggedInUser);
         }
 
         private void GetHistoricalRates_Click(object sender, RoutedEventArgs e)
