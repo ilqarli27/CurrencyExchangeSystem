@@ -26,6 +26,18 @@ namespace ConsoleClient.ServiceReference1 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetRate", ReplyAction="http://tempuri.org/IService1/GetRateResponse")]
         System.Threading.Tasks.Task<string> GetRateAsync(string currencyCode);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAllRates", ReplyAction="http://tempuri.org/IService1/GetAllRatesResponse")]
+        string GetAllRates();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAllRates", ReplyAction="http://tempuri.org/IService1/GetAllRatesResponse")]
+        System.Threading.Tasks.Task<string> GetAllRatesAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetHistoricalRates", ReplyAction="http://tempuri.org/IService1/GetHistoricalRatesResponse")]
+        string GetHistoricalRates(string currencyCode, string startDate, string endDate);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetHistoricalRates", ReplyAction="http://tempuri.org/IService1/GetHistoricalRatesResponse")]
+        System.Threading.Tasks.Task<string> GetHistoricalRatesAsync(string currencyCode, string startDate, string endDate);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -69,6 +81,22 @@ namespace ConsoleClient.ServiceReference1 {
         
         public System.Threading.Tasks.Task<string> GetRateAsync(string currencyCode) {
             return base.Channel.GetRateAsync(currencyCode);
+        }
+        
+        public string GetAllRates() {
+            return base.Channel.GetAllRates();
+        }
+        
+        public System.Threading.Tasks.Task<string> GetAllRatesAsync() {
+            return base.Channel.GetAllRatesAsync();
+        }
+        
+        public string GetHistoricalRates(string currencyCode, string startDate, string endDate) {
+            return base.Channel.GetHistoricalRates(currencyCode, startDate, endDate);
+        }
+        
+        public System.Threading.Tasks.Task<string> GetHistoricalRatesAsync(string currencyCode, string startDate, string endDate) {
+            return base.Channel.GetHistoricalRatesAsync(currencyCode, startDate, endDate);
         }
     }
 }

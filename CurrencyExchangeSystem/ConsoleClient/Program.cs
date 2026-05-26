@@ -9,14 +9,18 @@ namespace ConsoleClient
         {
             Service1Client client = new Service1Client();
 
-            string mesaj = client.SayHello("Anar");
-            Console.WriteLine(mesaj);
+            // Test SayHello
+            Console.WriteLine(client.SayHello("Anar"));
 
-            string usd = client.GetRate("USD");
-            Console.WriteLine(usd);
+            // Test GetRate
+            Console.WriteLine(client.GetRate("USD"));
+            Console.WriteLine(client.GetRate("EUR"));
 
-            string eur = client.GetRate("EUR");
-            Console.WriteLine(eur);
+            // Test GetAllRates
+            Console.WriteLine(client.GetAllRates());
+
+            // Test GetHistoricalRates
+            Console.WriteLine(client.GetHistoricalRates("USD", "2024-01-01", "2024-01-10"));
 
             Console.ReadKey();
         }
