@@ -1,3 +1,6 @@
 <Solution>
-  <Project Path="CurrencyExchangeSystem/CurrencyExchangeSystem.csproj" />
+  <Project Path="CurrencyExchangeSystem/ConsoleClient/ConsoleClient.csproj" Id="e4c9ceea-c86b-4863-80c1-a0441480e447">
+    <BuildDependency Project="CurrencyExchangeSystem/CurrencyExchangeSystem.csproj" />
+  </Project>
+  <Project Path="CurrencyExchangeSystem/CurrencyExchangeSystem.csproj" Id="b4ea83bb-08c3-4ccf-81ad-92a12ae3bd3f" />
 </Solution>
