@@ -8,6 +8,8 @@ namespace ConsoleClient
         static void Main(string[] args)
         {
             Service1Client client = new Service1Client();
+            Console.WriteLine(client.GetRate("USD"));
+            Console.WriteLine(client.GetRate("EUR"));
 
             // Register a user
             Console.WriteLine(client.Register("Anar", "1234"));

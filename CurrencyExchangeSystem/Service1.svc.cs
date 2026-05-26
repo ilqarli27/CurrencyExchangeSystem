@@ -26,9 +26,13 @@ namespace CurrencyExchangeSystem
 
                 int idx = json.IndexOf("\"mid\":");
                 string after = json.Substring(idx + 6);
-                string rate = after.Split(',')[0].Split('}')[0].Trim();
+                decimal mid = decimal.Parse(after.Split(',')[0].Split('}')[0].Trim(),
+                    System.Globalization.CultureInfo.InvariantCulture);
 
-                return currencyCode.ToUpper() + " = " + rate + " PLN";
+                decimal bid = Math.Round(mid * 0.99m, 4);
+                decimal ask = Math.Round(mid * 1.01m, 4);
+
+                return currencyCode.ToUpper() + " | mid: " + mid + " | buy: " + ask + " | sell: " + bid + " PLN";
             }
             catch
             {
