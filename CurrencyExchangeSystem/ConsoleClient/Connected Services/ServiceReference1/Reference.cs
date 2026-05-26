@@ -15,12 +15,6 @@ namespace ConsoleClient.ServiceReference1 {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference1.IService1")]
     public interface IService1 {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SayHello", ReplyAction="http://tempuri.org/IService1/SayHelloResponse")]
-        string SayHello(string name);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SayHello", ReplyAction="http://tempuri.org/IService1/SayHelloResponse")]
-        System.Threading.Tasks.Task<string> SayHelloAsync(string name);
-        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetRate", ReplyAction="http://tempuri.org/IService1/GetRateResponse")]
         string GetRate(string currencyCode);
         
@@ -38,6 +32,48 @@ namespace ConsoleClient.ServiceReference1 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetHistoricalRates", ReplyAction="http://tempuri.org/IService1/GetHistoricalRatesResponse")]
         System.Threading.Tasks.Task<string> GetHistoricalRatesAsync(string currencyCode, string startDate, string endDate);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/Register", ReplyAction="http://tempuri.org/IService1/RegisterResponse")]
+        string Register(string username, string password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/Register", ReplyAction="http://tempuri.org/IService1/RegisterResponse")]
+        System.Threading.Tasks.Task<string> RegisterAsync(string username, string password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/Login", ReplyAction="http://tempuri.org/IService1/LoginResponse")]
+        string Login(string username, string password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/Login", ReplyAction="http://tempuri.org/IService1/LoginResponse")]
+        System.Threading.Tasks.Task<string> LoginAsync(string username, string password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/TopUp", ReplyAction="http://tempuri.org/IService1/TopUpResponse")]
+        string TopUp(string username, decimal amount);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/TopUp", ReplyAction="http://tempuri.org/IService1/TopUpResponse")]
+        System.Threading.Tasks.Task<string> TopUpAsync(string username, decimal amount);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetBalance", ReplyAction="http://tempuri.org/IService1/GetBalanceResponse")]
+        string GetBalance(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetBalance", ReplyAction="http://tempuri.org/IService1/GetBalanceResponse")]
+        System.Threading.Tasks.Task<string> GetBalanceAsync(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/BuyCurrency", ReplyAction="http://tempuri.org/IService1/BuyCurrencyResponse")]
+        string BuyCurrency(string username, string currencyCode, decimal amount);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/BuyCurrency", ReplyAction="http://tempuri.org/IService1/BuyCurrencyResponse")]
+        System.Threading.Tasks.Task<string> BuyCurrencyAsync(string username, string currencyCode, decimal amount);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SellCurrency", ReplyAction="http://tempuri.org/IService1/SellCurrencyResponse")]
+        string SellCurrency(string username, string currencyCode, decimal amount);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SellCurrency", ReplyAction="http://tempuri.org/IService1/SellCurrencyResponse")]
+        System.Threading.Tasks.Task<string> SellCurrencyAsync(string username, string currencyCode, decimal amount);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetTransactionHistory", ReplyAction="http://tempuri.org/IService1/GetTransactionHistoryResponse")]
+        string GetTransactionHistory(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetTransactionHistory", ReplyAction="http://tempuri.org/IService1/GetTransactionHistoryResponse")]
+        System.Threading.Tasks.Task<string> GetTransactionHistoryAsync(string username);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -67,14 +103,6 @@ namespace ConsoleClient.ServiceReference1 {
                 base(binding, remoteAddress) {
         }
         
-        public string SayHello(string name) {
-            return base.Channel.SayHello(name);
-        }
-        
-        public System.Threading.Tasks.Task<string> SayHelloAsync(string name) {
-            return base.Channel.SayHelloAsync(name);
-        }
-        
         public string GetRate(string currencyCode) {
             return base.Channel.GetRate(currencyCode);
         }
@@ -97,6 +125,62 @@ namespace ConsoleClient.ServiceReference1 {
         
         public System.Threading.Tasks.Task<string> GetHistoricalRatesAsync(string currencyCode, string startDate, string endDate) {
             return base.Channel.GetHistoricalRatesAsync(currencyCode, startDate, endDate);
+        }
+        
+        public string Register(string username, string password) {
+            return base.Channel.Register(username, password);
+        }
+        
+        public System.Threading.Tasks.Task<string> RegisterAsync(string username, string password) {
+            return base.Channel.RegisterAsync(username, password);
+        }
+        
+        public string Login(string username, string password) {
+            return base.Channel.Login(username, password);
+        }
+        
+        public System.Threading.Tasks.Task<string> LoginAsync(string username, string password) {
+            return base.Channel.LoginAsync(username, password);
+        }
+        
+        public string TopUp(string username, decimal amount) {
+            return base.Channel.TopUp(username, amount);
+        }
+        
+        public System.Threading.Tasks.Task<string> TopUpAsync(string username, decimal amount) {
+            return base.Channel.TopUpAsync(username, amount);
+        }
+        
+        public string GetBalance(string username) {
+            return base.Channel.GetBalance(username);
+        }
+        
+        public System.Threading.Tasks.Task<string> GetBalanceAsync(string username) {
+            return base.Channel.GetBalanceAsync(username);
+        }
+        
+        public string BuyCurrency(string username, string currencyCode, decimal amount) {
+            return base.Channel.BuyCurrency(username, currencyCode, amount);
+        }
+        
+        public System.Threading.Tasks.Task<string> BuyCurrencyAsync(string username, string currencyCode, decimal amount) {
+            return base.Channel.BuyCurrencyAsync(username, currencyCode, amount);
+        }
+        
+        public string SellCurrency(string username, string currencyCode, decimal amount) {
+            return base.Channel.SellCurrency(username, currencyCode, amount);
+        }
+        
+        public System.Threading.Tasks.Task<string> SellCurrencyAsync(string username, string currencyCode, decimal amount) {
+            return base.Channel.SellCurrencyAsync(username, currencyCode, amount);
+        }
+        
+        public string GetTransactionHistory(string username) {
+            return base.Channel.GetTransactionHistory(username);
+        }
+        
+        public System.Threading.Tasks.Task<string> GetTransactionHistoryAsync(string username) {
+            return base.Channel.GetTransactionHistoryAsync(username);
         }
     }
 }

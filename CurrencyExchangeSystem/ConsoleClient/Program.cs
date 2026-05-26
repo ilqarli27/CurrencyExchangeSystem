@@ -9,18 +9,29 @@ namespace ConsoleClient
         {
             Service1Client client = new Service1Client();
 
-            // Test SayHello
-            Console.WriteLine(client.SayHello("Anar"));
+            // Register a user
+            Console.WriteLine(client.Register("Anar", "1234"));
 
-            // Test GetRate
-            Console.WriteLine(client.GetRate("USD"));
-            Console.WriteLine(client.GetRate("EUR"));
+            // Login
+            Console.WriteLine(client.Login("Anar", "1234"));
 
-            // Test GetAllRates
-            Console.WriteLine(client.GetAllRates());
+            // Top up balance
+            Console.WriteLine(client.TopUp("Anar", 1000));
 
-            // Test GetHistoricalRates
-            Console.WriteLine(client.GetHistoricalRates("USD", "2024-01-01", "2024-01-10"));
+            // Check balance
+            Console.WriteLine(client.GetBalance("Anar"));
+
+            // Buy USD
+            Console.WriteLine(client.BuyCurrency("Anar", "USD", 100));
+
+            // Check balance again
+            Console.WriteLine(client.GetBalance("Anar"));
+
+            // Sell USD
+            Console.WriteLine(client.SellCurrency("Anar", "USD", 50));
+
+            // Transaction history
+            Console.WriteLine(client.GetTransactionHistory("Anar"));
 
             Console.ReadKey();
         }

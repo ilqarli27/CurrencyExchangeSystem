@@ -1,23 +1,27 @@
-﻿using System.Net;
+﻿using System;
+using System.Collections.Generic;
+using System.Net;
+using System.Text;
 
 namespace CurrencyExchangeSystem
 {
     public class Service1 : IService1
     {
-        public string SayHello(string name)
-        {
-            return $"Hello, {name}! Service is working.";
-        }
+        // In-memory storage
+        private static Dictionary<string, string> users = new Dictionary<string, string>();
+        private static Dictionary<string, decimal> plnBalances = new Dictionary<string, decimal>();
+        private static Dictionary<string, Dictionary<string, decimal>> wallets = new Dictionary<string, Dictionary<string, decimal>>();
+        private static List<string> transactions = new List<string>();
 
+        // --- Rates ---
         public string GetRate(string currencyCode)
         {
             try
             {
                 string url = "http://api.nbp.pl/api/exchangerates/rates/a/"
                              + currencyCode.ToUpper() + "/?format=json";
-
                 WebClient client = new WebClient();
-                client.Encoding = System.Text.Encoding.UTF8;
+                client.Encoding = Encoding.UTF8;
                 string json = client.DownloadString(url);
 
                 int idx = json.IndexOf("\"mid\":");
@@ -37,9 +41,8 @@ namespace CurrencyExchangeSystem
             try
             {
                 string url = "http://api.nbp.pl/api/exchangerates/tables/a/?format=json";
-
                 WebClient client = new WebClient();
-                client.Encoding = System.Text.Encoding.UTF8;
+                client.Encoding = Encoding.UTF8;
                 string json = client.DownloadString(url);
 
                 string result = "All exchange rates (PLN):\n";
@@ -75,9 +78,8 @@ namespace CurrencyExchangeSystem
             {
                 string url = "http://api.nbp.pl/api/exchangerates/rates/a/"
                              + currencyCode.ToUpper() + "/" + startDate + "/" + endDate + "/?format=json";
-
                 WebClient client = new WebClient();
-                client.Encoding = System.Text.Encoding.UTF8;
+                client.Encoding = Encoding.UTF8;
                 string json = client.DownloadString(url);
 
                 string result = currencyCode.ToUpper() + " historical rates:\n";
@@ -105,6 +107,144 @@ namespace CurrencyExchangeSystem
             {
                 return "Error: could not retrieve historical rates for " + currencyCode;
             }
+        }
+
+        // --- Users ---
+        public string Register(string username, string password)
+        {
+            if (users.ContainsKey(username))
+                return "Error: username already exists.";
+
+            users[username] = password;
+            plnBalances[username] = 0;
+            wallets[username] = new Dictionary<string, decimal>();
+            return "Success: user " + username + " registered.";
+        }
+
+        public string Login(string username, string password)
+        {
+            if (!users.ContainsKey(username))
+                return "Error: user not found.";
+            if (users[username] != password)
+                return "Error: wrong password.";
+            return "Success: welcome " + username + "!";
+        }
+
+        // --- Account ---
+        public string TopUp(string username, decimal amount)
+        {
+            if (!users.ContainsKey(username))
+                return "Error: user not found.";
+
+            plnBalances[username] += amount;
+            transactions.Add(username + " | TOPUP | " + amount + " PLN | " + DateTime.Now.ToString("yyyy-MM-dd HH:mm"));
+            return "Success: balance is now " + plnBalances[username] + " PLN.";
+        }
+
+        public string GetBalance(string username)
+        {
+            if (!users.ContainsKey(username))
+                return "Error: user not found.";
+
+            string result = "PLN balance: " + plnBalances[username] + "\n";
+            foreach (var w in wallets[username])
+                result += w.Key + ": " + w.Value + "\n";
+            return result;
+        }
+
+        // --- Exchange ---
+        public string BuyCurrency(string username, string currencyCode, decimal amount)
+        {
+            if (!users.ContainsKey(username))
+                return "Error: user not found.";
+
+            try
+            {
+                string url = "http://api.nbp.pl/api/exchangerates/rates/a/"
+                             + currencyCode.ToUpper() + "/?format=json";
+                WebClient client = new WebClient();
+                client.Encoding = Encoding.UTF8;
+                string json = client.DownloadString(url);
+
+                int idx = json.IndexOf("\"mid\":");
+                string after = json.Substring(idx + 6);
+                decimal mid = decimal.Parse(after.Split(',')[0].Split('}')[0].Trim(),
+                    System.Globalization.CultureInfo.InvariantCulture);
+
+                decimal askRate = Math.Round(mid * 1.01m, 4);
+                decimal cost = Math.Round(amount * askRate, 2);
+
+                if (plnBalances[username] < cost)
+                    return "Error: not enough PLN balance. Need " + cost + " PLN.";
+
+                plnBalances[username] -= cost;
+
+                if (!wallets[username].ContainsKey(currencyCode.ToUpper()))
+                    wallets[username][currencyCode.ToUpper()] = 0;
+                wallets[username][currencyCode.ToUpper()] += amount;
+
+                transactions.Add(username + " | BUY | " + amount + " " + currencyCode.ToUpper()
+                    + " | rate: " + askRate + " | cost: " + cost + " PLN | " + DateTime.Now.ToString("yyyy-MM-dd HH:mm"));
+
+                return "Success: bought " + amount + " " + currencyCode.ToUpper()
+                    + " for " + cost + " PLN. New PLN balance: " + plnBalances[username];
+            }
+            catch
+            {
+                return "Error: could not complete purchase.";
+            }
+        }
+
+        public string SellCurrency(string username, string currencyCode, decimal amount)
+        {
+            if (!users.ContainsKey(username))
+                return "Error: user not found.";
+
+            if (!wallets[username].ContainsKey(currencyCode.ToUpper()) ||
+                wallets[username][currencyCode.ToUpper()] < amount)
+                return "Error: not enough " + currencyCode.ToUpper() + " in wallet.";
+
+            try
+            {
+                string url = "http://api.nbp.pl/api/exchangerates/rates/a/"
+                             + currencyCode.ToUpper() + "/?format=json";
+                WebClient client = new WebClient();
+                client.Encoding = Encoding.UTF8;
+                string json = client.DownloadString(url);
+
+                int idx = json.IndexOf("\"mid\":");
+                string after = json.Substring(idx + 6);
+                decimal mid = decimal.Parse(after.Split(',')[0].Split('}')[0].Trim(),
+                    System.Globalization.CultureInfo.InvariantCulture);
+
+                decimal bidRate = Math.Round(mid * 0.99m, 4);
+                decimal earned = Math.Round(amount * bidRate, 2);
+
+                wallets[username][currencyCode.ToUpper()] -= amount;
+                plnBalances[username] += earned;
+
+                transactions.Add(username + " | SELL | " + amount + " " + currencyCode.ToUpper()
+                    + " | rate: " + bidRate + " | earned: " + earned + " PLN | " + DateTime.Now.ToString("yyyy-MM-dd HH:mm"));
+
+                return "Success: sold " + amount + " " + currencyCode.ToUpper()
+                    + " for " + earned + " PLN. New PLN balance: " + plnBalances[username];
+            }
+            catch
+            {
+                return "Error: could not complete sale.";
+            }
+        }
+
+        public string GetTransactionHistory(string username)
+        {
+            if (!users.ContainsKey(username))
+                return "Error: user not found.";
+
+            string result = "Transaction history for " + username + ":\n";
+            foreach (var t in transactions)
+                if (t.StartsWith(username))
+                    result += t + "\n";
+            return result;
         }
     }
 }
