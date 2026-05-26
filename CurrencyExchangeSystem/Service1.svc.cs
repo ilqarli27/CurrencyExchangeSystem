@@ -80,8 +80,21 @@ namespace CurrencyExchangeSystem
         {
             try
             {
+                // Date format must be: yyyy-MM-dd
+                DateTime start = DateTime.Parse(startDate);
+                DateTime end = DateTime.Parse(endDate);
+
+                if (start > end)
+                    return "Error: start date cannot be after end date.";
+
+                if ((end - start).TotalDays > 93)
+                    return "Error: date range cannot exceed 93 days (NBP API limit).";
+
                 string url = "http://api.nbp.pl/api/exchangerates/rates/a/"
-                             + currencyCode.ToUpper() + "/" + startDate + "/" + endDate + "/?format=json";
+                             + currencyCode.ToUpper() + "/"
+                             + start.ToString("yyyy-MM-dd") + "/"
+                             + end.ToString("yyyy-MM-dd") + "/?format=json";
+
                 WebClient client = new WebClient();
                 client.Encoding = Encoding.UTF8;
                 string json = client.DownloadString(url);
@@ -107,9 +120,9 @@ namespace CurrencyExchangeSystem
 
                 return result;
             }
-            catch
+            catch (Exception ex)
             {
-                return "Error: could not retrieve historical rates for " + currencyCode;
+                return "Error: " + ex.Message;
             }
         }
 
