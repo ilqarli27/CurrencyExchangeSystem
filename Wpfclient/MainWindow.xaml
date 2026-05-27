@@ -47,17 +47,19 @@
 
             <TabItem Header="History">
                 <StackPanel Margin="20">
-                    <TextBlock Text="Username:" Margin="0,0,0,5"/>
-                    <TextBox x:Name="txtHistUsername" Width="200" HorizontalAlignment="Left" Margin="0,0,0,10"/>
+                    <TextBlock Text="--- Transaction History ---" FontWeight="Bold" Margin="0,0,0,10"/>
+                    <Button Content="Get My Transactions" Width="200" HorizontalAlignment="Left" Click="GetHistory_Click" Margin="0,0,0,10"/>
+
+                    <TextBlock Text="--- Historical Exchange Rates ---" FontWeight="Bold" Margin="0,10,0,10"/>
                     <TextBlock Text="Currency Code:" Margin="0,0,0,5"/>
                     <TextBox x:Name="txtHistCurrency" Width="200" HorizontalAlignment="Left" Margin="0,0,0,10"/>
                     <TextBlock Text="Start Date (yyyy-MM-dd):" Margin="0,0,0,5"/>
                     <TextBox x:Name="txtStartDate" Width="200" HorizontalAlignment="Left" Margin="0,0,0,10"/>
                     <TextBlock Text="End Date (yyyy-MM-dd):" Margin="0,0,0,5"/>
                     <TextBox x:Name="txtEndDate" Width="200" HorizontalAlignment="Left" Margin="0,0,0,10"/>
-                    <Button Content="Get Transaction History" Width="200" HorizontalAlignment="Left" Click="GetHistory_Click" Margin="0,0,0,5"/>
                     <Button Content="Get Historical Rates" Width="200" HorizontalAlignment="Left" Click="GetHistoricalRates_Click" Margin="0,0,0,10"/>
-                    <TextBox x:Name="txtHistResult" Height="150" IsReadOnly="True" VerticalScrollBarVisibility="Auto"/>
+
+                    <TextBox x:Name="txtHistResult" Height="200" IsReadOnly="True" VerticalScrollBarVisibility="Auto"/>
                 </StackPanel>
             </TabItem>
 
