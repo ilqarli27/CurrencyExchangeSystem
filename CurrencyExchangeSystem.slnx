@@ -1,4 +1,7 @@
 <Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="README.md" />
+  </Folder>
   <Project Path="CurrencyExchangeSystem/ConsoleClient/ConsoleClient.csproj" Id="e4c9ceea-c86b-4863-80c1-a0441480e447">
     <BuildDependency Project="CurrencyExchangeSystem/CurrencyExchangeSystem.csproj" />
   </Project>
